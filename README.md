@@ -1,5 +1,4 @@
 
-```markdown
 # AI-Powered Code Learning Platform
 
 This project is an AI-powered code learning platform that combines interactive coding with AI-generated solutions, pseudocode, hints, and explanations. It allows users to write, run, and debug code while learning programming concepts interactively.
@@ -43,7 +42,6 @@ Follow these steps to set up the project on your local machine:
 7. **Install Ollama LLM**:
    - Install the local LLM (e.g., `ollama`) and ensure it is configured properly.
 
----
 
 ### Steps to Run the Project
 
