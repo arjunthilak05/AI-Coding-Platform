@@ -1,6 +1,8 @@
 
 # AI-Powered Code Learning Platform
 
+Done By : Arjun Thilak and Anish Sriram
+
 This project is an AI-powered code learning platform that combines interactive coding with AI-generated solutions, pseudocode, hints, and explanations. It allows users to write, run, and debug code while learning programming concepts interactively.
 
 ## Features
