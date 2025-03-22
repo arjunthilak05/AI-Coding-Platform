@@ -110,10 +110,10 @@ Follow these steps to set up the project on your local machine:
 ## Screenshots
 
 ### Splash Screen
-![Splash Screen](https://drive.google.com/file/d/1g8Jsqi5tr9t5zJwnbdBPXXyPo3NLI2vH/view?usp=sharing)
+![Splash Screen](https://github.com/arjunthilak05/AI-Coding-Platform/blob/main/splash.png)
 
 ### Main Interface
-![Main Interface](https://drive.google.com/file/d/18BUIar09ffGord00vG-JurdybV0_MIMR/view?usp=sharing)
+![Main Interface](https://github.com/arjunthilak05/AI-Coding-Platform/blob/main/main.png)
 
 ---
 
