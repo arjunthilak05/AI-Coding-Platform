@@ -49,7 +49,7 @@ Follow these steps to set up the project on your local machine:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/ai-code-learning-platform.git
+   git clone https: https://github.com/arjunthilak05/AI-Coding-Platform.git
    cd ai-code-learning-platform
    ```
 
@@ -151,5 +151,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contact
 
 For any queries or feedback, please contact:
-- **Arjun Thilak**: [arjun@example.com](mailto:arjun@example.com)
-- **Anish Sriram**: [anish@example.com](mailto:anish@example.com)
+- **Arjun Thilak**: [arjun@example.com](arjunthilak.r-26@scds.saiuniversity.edu.in)
+- **Anish Sriram**: [anish@example.com](anishsriram.b-26@scds.saiuniversity.edu.in)
