@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Learning Platform</title>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Materialize CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<style>
+/* Modern 3D Dark Theme */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0e1a;
+  --bg-tertiary: #151c30;
+  --accent-primary: #4e54ff;
+  --accent-secondary: #00c2ff;
+  --text-primary: #ffffff;
+  --text-secondary: #b8c4e7;
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --info: #2196F3;
+}
+
+body {
+    background: #000000;
+    color: var(--text-secondary);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Space background with stars */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 230px 50px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 250px 250px;
+    animation: twinkling 10s infinite linear;
+    opacity: 0.5;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        radial-gradient(1px 1px at 150px 150px, #5d5dff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 210px 290px, #00c2ff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 320px 180px, #614ad3, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 380px 210px, #00c2ff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 400px 400px;
+    animation: twinkling 15s infinite linear;
+    opacity: 0.3;
+}
+
+@keyframes twinkling {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-250px);
+    }
+}
+
+h1 {
+    color: var(--text-primary);
+    text-align: center;
+    padding: 25px;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, rgba(10, 14, 26, 0.9), rgba(21, 28, 48, 0.9));
+    margin: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(3px);
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 130px);
+    padding: 20px;
+    gap: 20px;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.panel {
+    flex: 1;
+    background: linear-gradient(145deg, rgba(10, 14, 26, 0.9), rgba(21, 28, 48, 0.9));
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transform: translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(78, 84, 255, 0.1);
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(78, 84, 255, 0.05), transparent);
+    pointer-events: none;
+}
+
+.panel:hover {
+    transform: translateY(-5px) translateZ(10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.editor-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+textarea {
+    flex-grow: 1;
+    background-color: rgba(20, 25, 45, 0.8);
+    color: var(--text-secondary);
+    border: 1px solid rgba(100, 100, 180, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(78, 84, 255, 0.2), 0 0 10px rgba(78, 84, 255, 0.5);
+}
+
+#output {
+    background: linear-gradient(to bottom, rgba(0, 5, 16, 0.9), rgba(0, 21, 32, 0.9));
+    color: #0cff70;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    border-radius: 8px;
+    margin-top: 10px;
+    min-height: 100px;
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 5px rgba(12, 255, 112, 0.2);
+    text-shadow: 0 0 5px rgba(12, 255, 112, 0.5);
+    border: 1px solid rgba(12, 255, 112, 0.2);
+}
+
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.progress-indicator {
+    margin-top: 10px;
+    background-color: rgba(30, 35, 60, 0.5);
+    border-radius: 10px;
+    padding: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 8px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    width: 0%;
+    transition: width 0.3s;
+    box-shadow: 0 0 10px rgba(78, 84, 255, 0.5);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(145deg, rgba(10, 14, 26, 0.95), rgba(21, 28, 48, 0.95));
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    transform: translateY(20px);
+    animation: modalSlideUp 0.3s forwards;
+    backdrop-filter: blur(10px);
+}
+
+@keyframes modalSlideUp {
+    to { transform: translateY(0); }
+}
+
+.close-btn {
+    color: var(--text-secondary);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
+}
+
+.tab-container {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    background-color: rgba(50, 60, 100, 0.3);
+    border: 1px solid rgba(100, 100, 180, 0.2);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    margin-right: 5px;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tab:hover::before {
+    opacity: 1;
+}
+
+.tab.active {
+    background-color: rgba(70, 80, 140, 0.4);
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    color: var(--text-primary);
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid rgba(100, 100, 180, 0.2);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: rgba(30, 35, 60, 0.4);
+    color: var(--text-secondary);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.help-content {
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+pre {
+    background-color: rgba(40, 50, 80, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid rgba(100, 100, 180, 0.2);
+    color: var(--text-secondary);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    color: #b3e6ff;
+}
+
+/* Header with Project Details */
+.header {
+    background: linear-gradient(to right, rgba(10, 14, 26, 0.9), rgba(21, 28, 48, 0.9));
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 12px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    backdrop-filter: blur(3px);
+}
+
+.header span {
+    color: var(--accent-secondary);
+    font-weight: bold;
+    position: relative;
+    padding: 0 5px;
+}
+
+.header span::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+}
+
+/* Material Design Input */
+.input-field input[type="text"] {
+    color: var(--text-primary);
+    background-color: rgba(30, 35, 60, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(100, 100, 180, 0.2);
+    padding: 10px 15px;
+    box-sizing: border-box;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.input-field input[type="text"]:focus {
+    border-color: var(--accent-primary);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(78, 84, 255, 0.2), 0 0 10px rgba(78, 84, 255, 0.5);
+}
+
+/* Enhanced Buttons */
+.btn {
+    margin: 5px;
+    text-transform: none;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn.blue {
+    background: linear-gradient(135deg, #2196F3, #0d6efd);
+}
+
+.btn.orange {
+    background: linear-gradient(135deg, #FF9800, #fd7e14);
+}
+
+.btn.purple {
+    background: linear-gradient(135deg, #9C27B0, #6f42c1);
+}
+
+.btn.red {
+    background: linear-gradient(135deg, #F44336, #dc3545);
+}
+
+.btn.green {
+    background: linear-gradient(135deg, #4CAF50, #198754);
+}
+
+/* Language Selector Styling */
+#languageSelector {
+    background-color: rgba(30, 35, 60, 0.4);
+    color: var(--text-primary);
+    border: 1px solid rgba(100, 100, 180, 0.3);
+    border-radius: 8px;
+    padding: 8px 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#languageSelector:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(78, 84, 255, 0.2), 0 0 10px rgba(78, 84, 255, 0.5);
+}
+
+#saveStatus {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: right;
+    opacity: 0.7;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 3D Glow Effect */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(78, 84, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(78, 84, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(78, 84, 255, 0.5); }
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    animation: glow 2s infinite;
+}
+
+/* Add styles for the toggle button */
+.toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#aiGeneratorPanel.hidden {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+/* Splash Screen Styles */
+#splashScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+#splashScreen::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(3px 3px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 100px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 200px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 300px 220px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 400px 200px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 500px 100px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 220px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 150px 180px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 250px 250px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 350px 150px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 550px 550px;
+    opacity: 0.3;
+    animation: starsMove 60s linear infinite;
+    z-index: -1;
+}
+
+@keyframes starsMove {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-550px) translateX(-550px) rotate(-5deg);
+    }
+}
+
+.welcome-text {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: welcomeFadeIn 2s ease-in-out forwards;
+    opacity: 0;
+    text-shadow: 
+        0 0 10px rgba(78, 84, 255, 0.8),
+        0 0 30px rgba(0, 194, 255, 0.6);
+    letter-spacing: 1px;
+}
+
+.creators-text {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    animation: welcomeFadeIn 2s ease-in-out 0.5s forwards;
+    opacity: 0;
+}
+
+.creators-text span {
+    color: var(--accent-secondary);
+    font-weight: 600;
+}
+
+.description-box {
+    max-width: 700px;
+    text-align: center;
+    line-height: 1.6;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background: rgba(26, 31, 54, 0.5);
+    border: 1px solid rgba(78, 84, 255, 0.2);
+    animation: welcomeFadeIn 2s ease-in-out 1s forwards;
+    opacity: 0;
+    margin: 0 20px;
+    box-shadow: 0 0 30px rgba(0, 194, 255, 0.2);
+}
+
+@keyframes welcomeFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#mainInterface {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#mainInterface.visible {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- Splash Screen -->
+<div id="splashScreen">
+    <div class="welcome-text">Welcome to the AI-Powered Coding Platform</div>
+    <div class="creators-text">Created by <span>Arjun Thilak</span> and <span>Anish Sriram</span></div>
+    <div class="description-box">
+        <p>This platform combines AI-powered code generation with an interactive learning environment.</p>
+        <p>Explore coding concepts through our AI assistant, which can generate complete code samples,</p>
+        <p>provide pseudocode explanations, and offer hints tailored to your learning journey.</p>
+        <p>Run and test your code directly in the browser as you learn and build your programming skills.</p>
+    </div>
+</div>
+
+<!-- Wrap existing content in main interface div -->
+<div id="mainInterface">
+    <!-- Header with Project Details -->
+    <div class="header">
+        AP Project by <span>Arjun Thilak</span> and <span>Anish Sriram</span>
+    </div>
+
+    <h1>Code Learning Platform</h1>
+
+    <div class="main-container">
+        <div class="split-container">
+            <!-- Left Panel (User Code) -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Your Code</h2>
+                    <select id="languageSelector" class="browser-default">
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                    </select>
+                </div>
+                <div class="editor-area">
+                    <textarea id="userCode" placeholder="Write your code here..."></textarea>
+                    <div id="saveStatus">Changes automatically saved</div>
+                    <div class="controls">
+                        <button class="btn orange" onclick="runCode()">Run Code</button>
+                        <button class="btn blue" onclick="clearUserCode()">Clear</button>
+                        <button class="btn purple" onclick="showPseudocode()">Pseudocode</button>
+                        <button class="btn red" onclick="getHint()">Get Hint</button>
+                    </div>
+                    <div id="output">Program output will appear here...</div>
+                </div>
+            </div>
+
+            <!-- Right Panel (AI Generated Code) -->
+            <div class="panel" id="aiGeneratorPanel">
+                <div class="panel-header">
+                    <h2>AI Code Generator</h2>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="topic" placeholder="Enter what you want to learn (e.g., 'Binary Search in C++')">
+                </div>
+                <div class="controls">
+                    <button class="btn primary" onclick="generateCode()">Generate Full Code</button>
+                    <button class="btn blue" onclick="getMethodSignatures()">Get Method Signatures</button>
+                    <button class="btn orange" onclick="insertToEditor()">Insert to Editor</button>
+                </div>
+                <div id="loading">Generating content... Please wait...</div>
+                <div class="editor-area">
+                    <textarea id="aiCode" placeholder="AI generated code will appear here..." readonly></textarea>
+                    <div class="progress-indicator">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn green" id="copyButton" onclick="copyAICode()">Copy to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="toggleAIGenerator" class="btn blue toggle-btn">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+    </div>
+
+    <!-- Modal for pseudocode and hints -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="tab-container">
+                <div class="tab active" onclick="switchTab('pseudocode')">Pseudocode</div>
+                <div class="tab" onclick="switchTab('methodSignatures')">Method Signatures</div>
+                <div class="tab" onclick="switchTab('hints')">Hints</div>
+                <div class="tab" onclick="switchTab('explanation')">Explanation</div>
+            </div>
+            <div id="pseudocode" class="tab-content active">
+                <div class="help-content" id="pseudocodeContent">
+                    <h3>Algorithm Pseudocode</h3>
+                    <p>Loading pseudocode...</p>
+                </div>
+            </div>
+            <div id="methodSignatures" class="tab-content">
+                <div class="help-content" id="methodSignaturesContent">
+                    <h3>Method Signatures</h3>
+                    <p>Loading method signatures...</p>
+                </div>
+            </div>
+            <div id="hints" class="tab-content">
+                <div class="help-content" id="hintsContent">
+                    <h3>Hints</h3>
+                    <p>Loading hints based on your code...</p>
+                </div>
+            </div>
+            <div id="explanation" class="tab-content">
+                <div class="help-content" id="explanationContent">
+                    <h3>Algorithm Explanation</3>
+                    <p>Loading explanation...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+// Store AI-generated content for later use
+let generatedContent = {
+    code: "",
+    pseudocode: "",
+    methodSignatures: "",
+    explanation: ""
+};
+let currentTopic = "";
+let lastSavedCode = "";
+let autoSaveTimer = null;
+
+// Splash screen handling
+function checkFirstTimeVisit() {
+    const hasVisited = localStorage.getItem('has_visited');
+    
+    if (!hasVisited) {
+        // First time visitor
+        document.getElementById('mainInterface').style.opacity = 0;
+        document.getElementById('splashScreen').style.display = 'flex';
+        
+        // Set the timer to hide splash screen after 10 seconds
+        setTimeout(function() {
+            // Fade out splash screen
+            const splashScreen = document.getElementById('splashScreen');
+            splashScreen.style.opacity = 0;
+            splashScreen.style.transition = 'opacity 1s ease';
+            
+            // Show main interface
+            document.getElementById('mainInterface').classList.add('visible');
+            
+            // After animation completes, remove splash screen from DOM
+            setTimeout(function() {
+                splashScreen.style.display = 'none';
+            }, 1000);
+        }, 10000);
+        
+        // Mark as visited
+        localStorage.setItem('has_visited', 'true');
+    } else {
+        // Returning visitor
+        document.getElementById('splashScreen').style.display = 'none';
+        document.getElementById('mainInterface').classList.add('visible');
+    }
+}
+
+// Function to auto-save code as user types
+function setupAutoSave() {
+    const userCodeArea = document.getElementById('userCode');
+    
+    userCodeArea.addEventListener('input', function() {
+        clearTimeout(autoSaveTimer);
+        document.getElementById('saveStatus').textContent = "Saving...";
+        
+        autoSaveTimer = setTimeout(function() {
+            saveUserCode();
+            document.getElementById('saveStatus').textContent = "Changes saved";
+        }, 1000);
+    });
+}
+
+// Function to save user code
+function saveUserCode() {
+    const code = document.getElementById('userCode').value;
+    const language = document.getElementById('languageSelector').value;
+    const topic = currentTopic || "general";
+    
+    if (code === lastSavedCode) {
+        return;
+    }
+    
+    lastSavedCode = code;
+    
+    // In a real app, this would save to server or localStorage
+    localStorage.setItem(`${topic}_${language}_code`, code);
+    
+    // For demo purposes, we're using localStorage, but in production
+    // this would likely be an API call to your backend
+    /*
+    fetch('/save-code', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            code: code,
+            language: language,
+            topic: topic
+        }),
+    });
+    */
+}
+
+// Add this JavaScript function
+function setupCustomCodeGeneration() {
+    const generateCustomBtn = document.getElementById('generateCustomBtn');
+    
+    generateCustomBtn.addEventListener('click', function() {
+        // Show a modal or prompt to get custom input
+        const customPrompt = prompt("Enter your custom code generation prompt:", "");
+        if (!customPrompt) return; // User cancelled
+        
+        // Show loading indicator
+        showLoading("Generating custom code...");
+        
+        // Get the current selected language
+        const language = document.getElementById('languageSelect').value;
+        
+        // Call the API
+        fetch('/generate-custom', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: customPrompt,
+                language: language
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                showError(data.error);
+                return;
+            }
+            
+            // Get the code editor and update it with the custom generated code
+            const codeEditor = document.getElementById('codeEditor');
+            codeEditor.value = data.code;
+            
+            // If you're using a code editor library like CodeMirror or Monaco, use their API instead
+            // For example, with CodeMirror:
+            // codeEditor.setValue(data.code);
+            
+            hideLoading();
+            showMessage("Custom code generated successfully!");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            hideLoading();
+            showError("Failed to generate custom code. Please try again.");
+        });
+    });
+}
+
+// Function to load saved code
+function loadUserCode() {
+    const language = document.getElementById('languageSelector').value;
+    const topic = currentTopic || "general";
+    
+    const savedCode = localStorage.getItem(`${topic}_${language}_code`);
+    
+    if (savedCode) {
+        document.getElementById('userCode').value = savedCode;
+        lastSavedCode = savedCode;
+    }
+}
+
+function generateCode() {
+    const topic = document.getElementById('topic').value;
+    if (!topic) {
+        alert('Please enter a topic');
+        return;
+    }
+    
+    currentTopic = topic;
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('aiCode').value = '';
+    updateProgressBar(10);
+    
+    fetch('/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            topic: topic,
+            language: document.getElementById('languageSelector').value,
+            type: 'full_code'
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('aiCode').value = data.code;
+        generatedContent.code = data.code;
+        
+        // Also save other content if available
+        if (data.pseudocode) generatedContent.pseudocode = data.pseudocode;
+        if (data.methodSignatures) generatedContent.methodSignatures = data.methodSignatures;
+        if (data.explanation) generatedContent.explanation = data.explanation;
+        
+        updateProgressBar(100);
+        
+        // Load any previously saved code for this topic
+        loadUserCode();
+    })
+    .catch(error => {
+        document.getElementById('loading').style.display = 'none';
+        alert('Error: ' + error);
+        updateProgressBar(0);
+    });
+}
+
+function getMethodSignatures() {
+    const topic = document.getElementById('topic').value;
+    if (!topic) {
+        alert('Please enter a topic');
+        return;
+    }
+    
+    currentTopic = topic;
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('aiCode').value = '';
+    updateProgressBar(10);
+    
+    fetch('/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            topic: topic,
+            language: document.getElementById('languageSelector').value,
+            type: 'method_signatures'
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('aiCode').value = data.methodSignatures;
+        generatedContent.methodSignatures = data.methodSignatures;
+        updateProgressBar(100);
+    })
+    .catch(error => {
+        document.getElementById('loading').style.display = 'none';
+        alert('Error: ' + error);
+        updateProgressBar(0);
+    });
+}
+
+function showPseudocode() {
+    if (!currentTopic) {
+        const topicInput = document.getElementById('topic').value;
+        if (!topicInput) {
+            alert('Please enter a topic first');
+            return;
+        }
+        currentTopic = topicInput;
+    }
+    
+    // If we already have pseudocode, show it
+    if (generatedContent.pseudocode) {
+        document.getElementById('pseudocodeContent').innerHTML = `<h3>Algorithm Pseudocode</h3>${generatedContent.pseudocode}`;
+        showModal('pseudocode');
+        return;
+    }
+    
+    // Otherwise, fetch it
+    document.getElementById('loading').style.display = 'block';
+    updateProgressBar(10);
+    
+    fetch('/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            topic: currentTopic,
+            language: document.getElementById('languageSelector').value,
+            type: 'pseudocode'
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        generatedContent.pseudocode = data.pseudocode;
+        document.getElementById('pseudocodeContent').innerHTML = `<h3>Algorithm Pseudocode</h3>${data.pseudocode}`;
+        updateProgressBar(100);
+        showModal('pseudocode');
+    })
+    .catch(error => {
+        document.getElementById('loading').style.display = 'none';
+        alert('Error: ' + error);
+        updateProgressBar(0);
+    });
+}
+
+function getHint() {
+    const userCode = document.getElementById('userCode').value;
+    if (!userCode) {
+        alert('Please write some code first to get specific hints');
+        return;
+    }
+    
+    if (!currentTopic) {
+        const topicInput = document.getElementById('topic').value;
+        if (!topicInput) {
+            alert('Please enter a topic first');
+            return;
+        }
+        currentTopic = topicInput;
+    }
+    
+    document.getElementById('loading').style.display = 'block';
+    updateProgressBar(10);
+    
+    fetch('/get-hint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            code: userCode,
+            topic: currentTopic,
+            language: document.getElementById('languageSelector').value
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('hintsContent').innerHTML = `<h3>Hints</h3>${data.hint}`;
+        
+        // Also update the explanation tab if we got an explanation
+        if (data.explanation) {
+            generatedContent.explanation = data.explanation;
+            document.getElementById('explanationContent').innerHTML = `<h3>Algorithm Explanation</h3>${data.explanation}`;
+        }
+        
+        updateProgressBar(100);
+        showModal('hints');
+    })
+    .catch(error => {
+        document.getElementById('loading').style.display = 'none';
+        alert('Error: ' + error);
+        updateProgressBar(0);
+    });
+}
+
+function copyAICode() {
+    const code = document.getElementById('aiCode').value;
+    if (!code) {
+        alert('No code to copy');
+        return;
+    }
+    navigator.clipboard.writeText(code).then(() => {
+        alert('Code copied to clipboard!');
+    }, () => {
+        alert('Failed to copy code');
+    });
+}
+
+function insertToEditor() {
+    const aiCode = document.getElementById('aiCode').value;
+    if (!aiCode) {
+        alert('No AI code to insert');
+        return;
+    }
+    
+    const userCodeArea = document.getElementById('userCode');
+    // If there's already code, add a line break
+    if (userCodeArea.value && !userCodeArea.value.endsWith('\n\n')) {
+        userCodeArea.value += '\n\n';
+    }
+    userCodeArea.value += aiCode;
+    
+    // Trigger save
+    saveUserCode();
+}
+
+function clearUserCode() {
+    if (document.getElementById('userCode').value !== '' && 
+        !confirm('Are you sure you want to clear your code? This cannot be undone.')) {
+        return;
+    }
+    
+    document.getElementById('userCode').value = '';
+    document.getElementById('output').innerHTML = 'Program output will appear here...';
+    saveUserCode();
+}
+
+function runCode() {
+    const code = document.getElementById('userCode').value;
+    if (!code) {
+        alert('Please write some code to run');
+        return;
+    }
+    
+    const language = document.getElementById('languageSelector').value;
+    const outputDiv = document.getElementById('output');
+    
+    outputDiv.innerHTML = 'Running code...';
+    
+    fetch('/run', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            code: code,
+            language: language 
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            outputDiv.innerHTML = `<span style="color: #ff6666;">Error: ${data.error}</span>`;
+        } else {
+            outputDiv.innerHTML = data.output.replace(/\n/g, '<br>');
+        }
+    })
+    .catch(error => {
+        outputDiv.innerHTML = `<span style="color: #ff6666;">Server Error: ${error}</span>`;
+    });
+}
+
+function showModal(activeTab) {
+    document.getElementById('helpModal').style.display = 'block';
+    switchTab(activeTab);
+}
+
+function closeModal() {
+    document.getElementById('helpModal').style.display = 'none';
+}
+
+function switchTab(tabId) {
+    // Hide all tabs
+    const tabContents = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
+    }
+    
+    // Remove active class from all tabs
+    const tabs = document.getElementsByClassName('tab');
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active');
+    }
+    
+    // Show the selected tab
+    document.getElementById(tabId).classList.add('active');
+    
+    // Highlight the selected tab button
+    const allTabs = document.getElementsByClassName('tab');
+    for (let i = 0; i < allTabs.length; i++) {
+        if (allTabs[i].textContent.toLowerCase().includes(tabId)) {
+            allTabs[i].classList.add('active');
+            break;
+        }
+    }
+}
+
+function updateProgressBar(percentage) {
+    document.getElementById('progressBar').style.width = percentage + '%';
+}
+
+// Initialize editor with some placeholder text based on selected language
+document.getElementById('languageSelector').addEventListener('change', function() {
+    const language = this.value;
+    let placeholder = '';
+    
+    switch(language) {
+        case 'cpp':
+            placeholder = '#include <iostream>\n\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}';
+            break;
+        case 'python':
+            placeholder = 'print("Hello, World!")';
+            break;
+        case 'java':
+            placeholder = 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}';
+            break;
+        case 'javascript':
+            placeholder = 'console.log("Hello, World!");';
+            break;
+    }
+    
+    // Check if we should load saved code instead of the template
+    loadUserCode();
+    
+    if (document.getElementById('userCode').value === '') {
+        document.getElementById('userCode').value = placeholder;
+        saveUserCode();
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+
+        setupCustomCodeGeneration();
+    });
+// When user clicks outside the modal, close it
+window.onclick = function(event) {
+    const modal = document.getElementById('helpModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Set initial language template and setup auto-save
+window.onload = function() {
+    // Check if it's first time visit
+    checkFirstTimeVisit();
+    
+    const selector = document.getElementById('languageSelector');
+    
+    // Set initial C++ template if no saved code
+    if (!localStorage.getItem('general_cpp_code')) {
+        document.getElementById('userCode').value = '#include <iostream>\n\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}';
+        saveUserCode();
+    } else {
+        loadUserCode();
+    }
+    
+    // Setup auto-save functionality
+    setupAutoSave();
+};
+
+document.getElementById('toggleAIGenerator').addEventListener('click', function() {
+    const aiPanel = document.getElementById('aiGeneratorPanel');
+    aiPanel.classList.toggle('hidden');
+    const icon = this.querySelector('i');
+    icon.textContent = aiPanel.classList.contains('hidden') ? 'arrow_back' : 'arrow_forward';
+});
+</script>
+</body>
+</html>
